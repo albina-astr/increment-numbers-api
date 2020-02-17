@@ -1,6 +1,6 @@
 package api.exception;
 
-import api.model.IncrementNumberResponse;
+import api.model.IncrementNumbersResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,7 +20,7 @@ public class ApplicationExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public Object handle(Exception ex) {
-        return IncrementNumberResponse.builder()
+        return IncrementNumbersResponse.builder()
                 .errorMessage(ex.getMessage())
                 .build();
     }

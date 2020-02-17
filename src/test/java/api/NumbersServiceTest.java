@@ -1,7 +1,8 @@
-package api.service;
+package api;
 
 
 import api.exception.CheckRequestStringException;
+import api.service.NumbersService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -10,10 +11,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
-public class NumberServiceTest {
+public class NumbersServiceTest {
 
     @InjectMocks
-    private NumberService service;
+    private NumbersService service;
 
     @Test
     public void incrementNumbersInString_Test_Successful() {

@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class IncrementNumberResponse {
+public class IncrementNumbersResponse {
 
     private String errorMessage;
     private String response;

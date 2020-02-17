@@ -1,27 +1,27 @@
 package api.controller;
 
-import api.model.IncrementNumberResponse;
-import api.model.IncrementNumberDto;
-import api.service.NumberService;
+import api.model.IncrementNumbersResponse;
+import api.model.IncrementNumbersDto;
+import api.service.NumbersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/numbers")
 public class Controller {
 
     @Autowired
-    private NumberService service;
+    private NumbersService service;
 
     @RequestMapping("/")
     public String hello() {
         return "hello there";
     }
 
-    @PostMapping("/numbers")
+    @PostMapping("/increment")
     @ResponseBody
-    public IncrementNumberResponse incrementNumbers(@RequestBody IncrementNumberDto dto) {
-        return IncrementNumberResponse.builder()
+    public IncrementNumbersResponse incrementNumbers(@RequestBody IncrementNumbersDto dto) {
+        return IncrementNumbersResponse.builder()
                 .response(service.incrementNumbersInString(dto.getRequest()))
                 .build();
     }

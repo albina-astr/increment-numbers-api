@@ -1,6 +1,6 @@
-package api.service;
+package api;
 
-import api.model.IncrementNumberDto;
+import api.model.IncrementNumbersDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +22,9 @@ public class ControllerTest {
     @Test
     public void incrementNumbers_Test_SuccessfulCase1() {
         String expected = "{\"errorMessage\":null,\"response\":\"13 15 1000\"}";
-        IncrementNumberDto requestDto = IncrementNumberDto.builder().request("12 14 999").build();
+        IncrementNumbersDto requestDto = IncrementNumbersDto.builder().request("12 14 999").build();
 
-        ResponseEntity<String> response = restTemplate.postForEntity("/numbers", requestDto, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("/numbers/increment", requestDto, String.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expected, response.getBody());
@@ -33,9 +33,9 @@ public class ControllerTest {
     @Test
     public void incrementNumbers_Test_SuccessfulCase2() {
         String expected = "{\"errorMessage\":null,\"response\":\"1000\"}";
-        IncrementNumberDto requestDto = IncrementNumberDto.builder().request("999").build();
+        IncrementNumbersDto requestDto = IncrementNumbersDto.builder().request("999").build();
 
-        ResponseEntity<String> response = restTemplate.postForEntity("/numbers", requestDto, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("/numbers/increment", requestDto, String.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expected, response.getBody());
@@ -44,9 +44,9 @@ public class ControllerTest {
     @Test
     public void incrementNumbers_Test_500ErrorStringWithLetters() {
         String expected = "{\"errorMessage\":\"В запросе не всё числа\",\"response\":null}";
-        IncrementNumberDto requestDto = IncrementNumberDto.builder().request("12в 13 1445").build();
+        IncrementNumbersDto requestDto = IncrementNumbersDto.builder().request("12в 13 1445").build();
 
-        ResponseEntity<String> response = restTemplate.postForEntity("/numbers", requestDto, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("/numbers/increment", requestDto, String.class);
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         assertEquals(expected, response.getBody());
@@ -55,9 +55,9 @@ public class ControllerTest {
     @Test
     public void incrementNumbers_Test_500ErrorNullString() {
         String expected = "{\"errorMessage\":\"Нулевая или пустая строка\",\"response\":null}";
-        IncrementNumberDto requestDto = IncrementNumberDto.builder().build();
+        IncrementNumbersDto requestDto = IncrementNumbersDto.builder().build();
 
-        ResponseEntity<String> response = restTemplate.postForEntity("/numbers", requestDto, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("/numbers/increment", requestDto, String.class);
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         assertEquals(expected, response.getBody());
@@ -66,9 +66,9 @@ public class ControllerTest {
     @Test
     public void incrementNumbers_Test_500ErrorEmptyString() {
         String expected = "{\"errorMessage\":\"Нулевая или пустая строка\",\"response\":null}";
-        IncrementNumberDto requestDto = IncrementNumberDto.builder().request("      ").build();
+        IncrementNumbersDto requestDto = IncrementNumbersDto.builder().request("      ").build();
 
-        ResponseEntity<String> response = restTemplate.postForEntity("/numbers", requestDto, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("/numbers/increment", requestDto, String.class);
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         assertEquals(expected, response.getBody());

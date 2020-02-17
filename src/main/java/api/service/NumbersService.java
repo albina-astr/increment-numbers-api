@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class NumberService {
+public class NumbersService {
 
     public String incrementNumbersInString(String data) {
 
